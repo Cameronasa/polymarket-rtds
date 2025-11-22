@@ -2,7 +2,7 @@
 
 > **⚠️ Early Alpha**: Some stuff may not work. Please open an issue if you encounter problems.
 
-A Rust port of the official [Polymarket Real-Time Data Streaming TypeScript SDK](https://github.com/Polymarket/real-time-data-streaming). This client provides a wrapper to connect to the `real-time-data-streaming` WebSocket service.
+A Rust port of the official [Polymarket Real-Time Data Streaming TypeScript SDK](https://github.com/Polymarket/real-time-data-client). This client provides a wrapper to connect to the `real-time-data-streaming` WebSocket service.
 
 ## Installation
 
@@ -131,33 +131,33 @@ client.subscribe(vec![subscription]).await?;
 
 ## Available Topics and Types
 
-| Topic | Type | Auth | Filters | Description |
-|-------|------|------|---------|-------------|
-| `activity` | `trades` | - | `{"event_slug":"string"}` OR `{"market_slug":"string"}` | Real-time trade activity |
-| `activity` | `orders_matched` | - | `{"event_slug":"string"}` OR `{"market_slug":"string"}` | Matched orders |
-| `comments` | `comment_created` | - | `{"parentEntityID":number,"parentEntityType":"Event / Series"}` | New comments |
-| `comments` | `comment_removed` | - | `{"parentEntityID":number,"parentEntityType":"Event / Series"}` | Removed comments |
-| `comments` | `reaction_created` | - | `{"parentEntityID":number,"parentEntityType":"Event / Series"}` | New reactions |
-| `comments` | `reaction_removed` | - | `{"parentEntityID":number,"parentEntityType":"Event / Series"}` | Removed reactions |
-| `rfq` | `request_created` | - | - | RFQ request created |
-| `rfq` | `request_edited` | - | - | RFQ request edited |
-| `rfq` | `request_canceled` | - | - | RFQ request canceled |
-| `rfq` | `request_expired` | - | - | RFQ request expired |
-| `rfq` | `quote_created` | - | - | RFQ quote created |
-| `rfq` | `quote_edited` | - | - | RFQ quote edited |
-| `rfq` | `quote_canceled` | - | - | RFQ quote canceled |
-| `rfq` | `quote_expired` | - | - | RFQ quote expired |
-| `crypto_prices` | `update` | - | `{"symbol":"BTCUSDT"}` | Crypto price updates |
-| `crypto_prices_chainlink` | `update` | - | `{"symbol":"BTCUSDT"}` | Chainlink crypto prices |
-| `equity_prices` | `update` | - | `{"symbol":"AAPL"}` | Equity price updates |
-| `clob_user` | `order` | ClobAuth | - | User order updates |
-| `clob_user` | `trade` | ClobAuth | - | User trade updates |
-| `clob_market` | `price_change` | - | `["100","200",...]` (mandatory) | Market price changes |
-| `clob_market` | `agg_orderbook` | - | `["100","200",...]` | Aggregated orderbook |
-| `clob_market` | `last_trade_price` | - | `["100","200",...]` | Last trade price |
-| `clob_market` | `tick_size_change` | - | `["100","200",...]` | Tick size changes |
-| `clob_market` | `market_created` | - | - | New market created |
-| `clob_market` | `market_resolved` | - | - | Market resolved |
+| Topic                     | Type               | Auth     | Filters                                                         | Description              |
+| ------------------------- | ------------------ | -------- | --------------------------------------------------------------- | ------------------------ |
+| `activity`                | `trades`           | -        | `{"event_slug":"string"}` OR `{"market_slug":"string"}`         | Real-time trade activity |
+| `activity`                | `orders_matched`   | -        | `{"event_slug":"string"}` OR `{"market_slug":"string"}`         | Matched orders           |
+| `comments`                | `comment_created`  | -        | `{"parentEntityID":number,"parentEntityType":"Event / Series"}` | New comments             |
+| `comments`                | `comment_removed`  | -        | `{"parentEntityID":number,"parentEntityType":"Event / Series"}` | Removed comments         |
+| `comments`                | `reaction_created` | -        | `{"parentEntityID":number,"parentEntityType":"Event / Series"}` | New reactions            |
+| `comments`                | `reaction_removed` | -        | `{"parentEntityID":number,"parentEntityType":"Event / Series"}` | Removed reactions        |
+| `rfq`                     | `request_created`  | -        | -                                                               | RFQ request created      |
+| `rfq`                     | `request_edited`   | -        | -                                                               | RFQ request edited       |
+| `rfq`                     | `request_canceled` | -        | -                                                               | RFQ request canceled     |
+| `rfq`                     | `request_expired`  | -        | -                                                               | RFQ request expired      |
+| `rfq`                     | `quote_created`    | -        | -                                                               | RFQ quote created        |
+| `rfq`                     | `quote_edited`     | -        | -                                                               | RFQ quote edited         |
+| `rfq`                     | `quote_canceled`   | -        | -                                                               | RFQ quote canceled       |
+| `rfq`                     | `quote_expired`    | -        | -                                                               | RFQ quote expired        |
+| `crypto_prices`           | `update`           | -        | `{"symbol":"BTCUSDT"}`                                          | Crypto price updates     |
+| `crypto_prices_chainlink` | `update`           | -        | `{"symbol":"BTCUSDT"}`                                          | Chainlink crypto prices  |
+| `equity_prices`           | `update`           | -        | `{"symbol":"AAPL"}`                                             | Equity price updates     |
+| `clob_user`               | `order`            | ClobAuth | -                                                               | User order updates       |
+| `clob_user`               | `trade`            | ClobAuth | -                                                               | User trade updates       |
+| `clob_market`             | `price_change`     | -        | `["100","200",...]` (mandatory)                                 | Market price changes     |
+| `clob_market`             | `agg_orderbook`    | -        | `["100","200",...]`                                             | Aggregated orderbook     |
+| `clob_market`             | `last_trade_price` | -        | `["100","200",...]`                                             | Last trade price         |
+| `clob_market`             | `tick_size_change` | -        | `["100","200",...]`                                             | Tick size changes        |
+| `clob_market`             | `market_created`   | -        | -                                                               | New market created       |
+| `clob_market`             | `market_resolved`  | -        | -                                                               | Market resolved          |
 
 ## Examples
 
@@ -244,7 +244,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## Message Schemas
 
-For detailed message schemas for each topic type, please refer to the [official TypeScript SDK documentation](https://github.com/Polymarket/real-time-data-streaming).
+For detailed message schemas for each topic type, please refer to the [official TypeScript SDK documentation](https://github.com/Polymarket/real-time-data-client).
 
 ## Contributing
 
@@ -256,4 +256,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
-This is a Rust port of the official [Polymarket Real-Time Data Streaming TypeScript SDK](https://github.com/Polymarket/real-time-data-streaming).
+This is a Rust port of the official [Polymarket Real-Time Data Streaming TypeScript SDK](https://github.com/Polymarket/real-time-data-client).
